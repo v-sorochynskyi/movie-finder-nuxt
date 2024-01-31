@@ -4,7 +4,7 @@ We recommend to look at the [documentation](https://v3.nuxtjs.org).
 
 ## Setup
 
-Make sure to install the dependencies
+Make sure to install the dependencies and add .env file (with content in .env.example file)
 
 ```bash
 yarn install
@@ -26,4 +26,4 @@ Build the application for production:
 yarn build
 ```
 
-Checkout the [deployment documentation](https://v3.nuxtjs.org/docs/deployment).
+Checkout the [deployment documentation](https://nuxt.com/docs/getting-started/deployment).
