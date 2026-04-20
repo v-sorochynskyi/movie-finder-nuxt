@@ -1,17 +1,3 @@
-# Nuxt 3 Minimal Starter
-
-We recommend to look at the [documentation](https://v3.nuxtjs.org).
-
-## Setup
-
-Make sure to install the dependencies and add .env file (with content in .env.example file)
-
-```bash
-yarn install
-```
-
-## Development
-
 # Movie Finder
 
 A movie discovery app built with Nuxt 3 and TypeScript. Search for films, browse by genre, and explore details — powered by a modern Vue 3 stack.
