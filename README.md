@@ -5,79 +5,65 @@ A movie discovery app built with Nuxt 3 and TypeScript. Search for films, browse
 ## Tech stack
 
 - **Nuxt 3** — SSR/SSG framework
-- - **TypeScript** — full type safety across the codebase
-  - - **Pinia** — state management
-    - - **Element Plus** — UI component library
-      - - **Tailwind CSS** — utility-first styling
-        - - **VueUse** — composable utilities
-          - - **i18n** — internationalization support
-            - - **Swiper** — touch-friendly carousels
-              -
-              - ## Getting started
-              -
-              - ### Prerequisites
-              -
-              - - Node.js 18+
-                - - Yarn
-                  -
-                  - ### Setup
-                  -
-                  - ```bash
-                    git clone https://github.com/v-sorochynskyi/movie-finder-nuxt.git
-                    cd movie-finder-nuxt
-                    yarn install
-                    ```
+- **TypeScript** — full type safety across the codebase
+- **Pinia** — state management
+- **Element Plus** — UI component library
+- **Tailwind CSS** — utility-first styling
+- **VueUse** — composable utilities
+- **i18n** — internationalization support
+- **Swiper** — touch-friendly carousels
 
-                    Copy the environment file and fill in your API key:
+## Getting started
 
-                    ```bash
-                    cp .env.example .env
-                    ```
+### Prerequisites
 
-                    ### Development
+- Node.js 18+
+- Yarn
 
-                    ```bash
-                    yarn dev
-                    ```
+### Setup
 
-                    App runs at `http://localhost:3000`
+```bash
+git clone https://github.com/v-sorochynskyi/movie-finder-nuxt.git
+cd movie-finder-nuxt
+yarn install
+```
 
-                    ### Production build
+Copy the environment file and fill in your API key:
 
-                    ```bash
-                    yarn build
-                    yarn preview
-                    ```
+```bash
+cp .env.example .env
+```
 
-                    ### Type check & lint
-
-                    ```bash
-                    yarn type-check
-                    yarn lint
-                    ```
-
-                    ## Project structure
-
-                    ```
-                    ├── components/     # Reusable Vue components
-                    ├── composables/    # Shared composition functions
-                    ├── pages/          # File-based routing
-                    ├── stores/         # Pinia state stores
-                    ├── types/          # TypeScript type definitions
-                    ├── i18n/           # Localization files
-                    └── layouts/        # Page layout wrappers
-                    ```Start the development server on http://localhost:3000
+### Development
 
 ```bash
 yarn dev
 ```
 
-## Production
+App runs at `http://localhost:3000`
 
-Build the application for production:
+### Production build
 
 ```bash
 yarn build
+yarn preview
 ```
 
-Checkout the [deployment documentation](https://nuxt.com/docs/getting-started/deployment).
+### Type check & lint
+
+```bash
+yarn type-check
+yarn lint
+```
+
+## Project structure
+
+```
+├── components/     # Reusable Vue components
+├── composables/    # Shared composition functions
+├── pages/          # File-based routing
+├── stores/         # Pinia state stores
+├── types/          # TypeScript type definitions
+├── i18n/           # Localization files
+└── layouts/        # Page layout wrappers
+```
