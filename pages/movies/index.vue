@@ -58,7 +58,10 @@ const pending = ref(false)
 
 if (!generalStore.movies.length && !generalStore.error) {
   pending.value = true
-  generalStore.getMovies({ search: route.query.search as string })
-    .finally(() => { pending.value = false })
+  try {
+    await generalStore.getMovies({ search: route.query.search as string })
+  } finally {
+    pending.value = false
+  }
 }
 </script>
