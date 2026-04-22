@@ -20,7 +20,6 @@ export default defineI18nConfig(() => ({
       }
     }
   },
-
   messages: {
     ...en,
     ...uk

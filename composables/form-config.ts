@@ -16,17 +16,21 @@ export function useElFormRules (model: FormRules) {
 }
 
 export function useRequiredRule ({ required = true } = {}) {
-  return { required, message: 'This field is required', trigger: 'change' } as FormItemRule
+  const { t } = useI18n()
+  return { required, message: t('general.required'), trigger: 'change' } as FormItemRule
 }
 
 export function useEmailRule () {
-  return { type: 'email', message: 'Invalid email', trigger: ['change', 'blur'] } as FormItemRule
+  const { t } = useI18n()
+  return { type: 'email', message: t('general.invalidEmail'), trigger: ['change', 'blur'] } as FormItemRule
 }
 
 export function useMinLenRule (min: number): FormItemRule {
-  return { min, message: `Min length is ${min}`, trigger: 'change' }
+  const { t } = useI18n()
+  return { min, message: t('general.minLen', { min }), trigger: 'change' }
 }
 
 export function useMaxLenRule (max: number): FormItemRule {
-  return { max, message: `Max length is ${max}`, trigger: 'change' }
+  const { t } = useI18n()
+  return { max, message: t('general.maxLen', { max }), trigger: 'change' }
 }

@@ -1,6 +1,6 @@
 <template>
-  <div class="flex justify-center">
-    <el-card class="max-w-[500px]">
+  <div class="flex">
+    <el-card shadow="never" class="mx-auto w-1/2 min-w-[500px]">
       <el-form
         ref="ruleFormRef"
         :model="ruleForm"
@@ -9,19 +9,19 @@
         label-width="100px"
         status-icon
       >
-        <el-form-item label="Title" prop="title">
+        <el-form-item :label="$t('general.title')" prop="title">
           <el-input v-model="ruleForm.title" />
         </el-form-item>
 
-        <el-form-item label="Director" prop="director">
+        <el-form-item :label="$t('general.director')" prop="director">
           <el-input v-model="ruleForm.director" />
         </el-form-item>
 
-        <el-form-item label="Year" prop="year">
+        <el-form-item :label="$t('general.year')" prop="year">
           <el-input v-model="ruleForm.year" />
         </el-form-item>
 
-        <el-form-item label="Plot" prop="plot">
+        <el-form-item :label="$t('general.plot')" prop="plot">
           <el-input v-model="ruleForm.plot" type="textarea" />
         </el-form-item>
 
@@ -34,18 +34,18 @@
           :auto-upload="false"
         >
           <template #trigger>
-            <el-button type="primary">Select file</el-button>
+            <el-button type="primary">{{ $t('general.selectFile') }}</el-button>
           </template>
           <template #tip>
             <div class="el-upload__tip text-red">
-              limit 1 file, new file will cover the old file
+              {{ $t('general.fileRestriction') }}
             </div>
           </template>
         </el-upload>
 
         <el-form-item>
           <el-button type="primary" class="ml-auto" @click="submitForm">
-            Create
+            {{ $t('general.create') }}
           </el-button>
         </el-form-item>
       </el-form>
@@ -82,7 +82,7 @@ const rules = useElFormRules({
 async function submitForm () {
   await ruleFormRef.value.validate((valid, fields) => {
     if (valid) {
-      console.log('submit!', fields)
+      console.log('submit!', valid)
       console.log(upload.value)
     } else {
       console.log('error submit!', fields)
@@ -91,10 +91,12 @@ async function submitForm () {
 }
 
 const handleExceed: UploadProps['onExceed'] = (files) => {
-  upload.value!.clearFiles()
+  if (!upload.value) return
+
+  upload.value.clearFiles()
   const file = files[0] as UploadRawFile
   file.uid = genFileId()
-  upload.value!.handleStart(file)
+  upload.value.handleStart(file)
 }
 
 </script>

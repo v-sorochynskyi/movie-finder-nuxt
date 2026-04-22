@@ -23,7 +23,7 @@
     >
       <SwiperSlide v-for="slide in generalStore.movies" :key="slide.imdbID">
         <NuxtLink
-          :to="`${localeRoutePath}/${slide.imdbID}`"
+          :to="{ name: routeName('movies-id'), params: { id: slide.imdbID } }"
           class="flex flex-col items-center w-full h-full"
         >
           <img
@@ -40,9 +40,9 @@
     </Swiper>
     <div v-else class="flex flex-col items-center gap-5">
       <h1 class="text-center">
-        {{ $t('general.noResults') }}
+        {{ generalStore.error || $t('general.noResults') }}
       </h1>
-      <el-button @click="navigateTo(localePath('index'))">Back to search</el-button>
+      <el-button @click="navigateTo({ name: routeName('index') })">Back to search</el-button>
     </div>
   </div>
 </template>
@@ -53,13 +53,10 @@ definePageMeta({
 })
 
 const generalStore = useGeneralStore()
-const localePath = useLocalePath()
+const routeName = useLocaleRouteName()
+const route = useRoute()
 
-const localeRoutePath = computed(() => {
-  return `${localePath('movies')}`
-})
-
-if (!generalStore.movies.length) {
-  generalStore.getMovies()
+if (!generalStore.movies.length && !generalStore.error) {
+  generalStore.getMovies({ search: route.query.search as string })
 }
 </script>
