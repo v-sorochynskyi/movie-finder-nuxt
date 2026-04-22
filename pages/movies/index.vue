@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-loading.fullscreen="pending">
     <Swiper
       v-if="generalStore.movies.length"
       :modules="[SwiperAutoplay, SwiperNavigation]"
@@ -38,11 +38,10 @@
         </NuxtLink>
       </SwiperSlide>
     </Swiper>
-    <div v-else class="flex flex-col items-center gap-5">
-      <h1 class="text-center">
-        {{ generalStore.error || $t('general.noResults') }}
-      </h1>
-      <el-button @click="navigateTo({ name: routeName('index') })">Back to search</el-button>
+    <div v-else-if="!pending" class="flex flex-col items-center gap-5">
+      <h1 v-if="generalStore.error" class="text-center">{{ generalStore.error }}</h1>
+      <h1 v-else class="text-center">{{ $t('general.noResults') }}</h1>
+      <el-button @click="navigateTo({ name: routeName('index') })">{{ $t('general.backToSearch') }}</el-button>
     </div>
   </div>
 </template>
@@ -55,8 +54,11 @@ definePageMeta({
 const generalStore = useGeneralStore()
 const routeName = useLocaleRouteName()
 const route = useRoute()
+const pending = ref(false)
 
 if (!generalStore.movies.length && !generalStore.error) {
+  pending.value = true
   generalStore.getMovies({ search: route.query.search as string })
+    .finally(() => { pending.value = false })
 }
 </script>
