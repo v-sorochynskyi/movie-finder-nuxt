@@ -13,8 +13,8 @@
       </Compute>
 
       <client-only>
-        <el-tooltip content="Back to search" effect="light">
-          <NuxtLink :to="localePath('index')">
+        <el-tooltip :content="$t('general.backToSearch')" effect="light">
+          <NuxtLink :to="{ name: routeName('index') }">
             <AppIconMovieClapper class="w-10 h-10" />
           </NuxtLink>
         </el-tooltip>
@@ -36,7 +36,7 @@
           </el-select>
         </client-only>
 
-        <el-button @click="navigateTo(localePath('movies-create'))"><AppIconPlus /></el-button>
+        <el-button @click="navigateTo({ name: routeName('movies-create') })"><AppIconPlus /></el-button>
       </div>
     </div>
 
@@ -53,6 +53,6 @@ import type { LocaleObject } from 'vue-i18n-routing'
 const { locale, locales } = useI18n()
 
 const switchLocalePath = useSwitchLocalePath()
-const localePath = useLocalePath()
+const routeName = useLocaleRouteName()
 
 </script>

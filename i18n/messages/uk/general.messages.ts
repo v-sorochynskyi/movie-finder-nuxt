@@ -1,5 +1,22 @@
 export const generalMessages = {
   welcome: 'Вітаємо',
   search: 'Знайти',
-  noResults: 'Нічого не знайдено'
+  noResults: 'Нічого не знайдено',
+  title: 'Назва',
+  director: 'Режисер',
+  year: 'Рік',
+  country: 'Країна',
+  genre: 'Жанр',
+  language: 'Мова',
+  plot: 'Сюжет',
+  imdbRating: 'Рейтинг IMDB',
+  imdbVotes: 'Голоси IMDB',
+  fileRestriction: 'Обмеження 1 файл, новий файл замінить старий файл',
+  create: 'Створити',
+  selectFile: 'Вибрати файл',
+  backToSearch: 'Повернутися до пошуку',
+  required: 'Це поле обов\'язкове для заповнення',
+  invalidEmail: 'Невірний email',
+  minLen: 'Мінімальна довжина {min} символів',
+  maxLen: 'Максимальна довжина {max} символів'
 }

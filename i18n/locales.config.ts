@@ -1,6 +1,6 @@
 export const localesConfig = {
   baseUrl: process.env.BASE_URL,
-
+  strategy: 'prefix',
   locales: [
     {
       code: 'en',

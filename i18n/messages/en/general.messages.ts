@@ -1,5 +1,22 @@
 export const generalMessages = {
   welcome: 'Welcome',
   search: 'Search',
-  noResults: 'No results'
+  noResults: 'No results',
+  title: 'Title',
+  director: 'Director',
+  year: 'Year',
+  country: 'Country',
+  genre: 'Genre',
+  language: 'Language',
+  plot: 'Plot',
+  imdbRating: 'IMDB Rating',
+  imdbVotes: 'IMDB Votes',
+  fileRestriction: 'Limit 1 file, new file will cover the old file',
+  create: 'Create',
+  selectFile: 'Select file',
+  backToSearch: 'Back to search',
+  required: 'This field is required',
+  invalidEmail: 'Invalid email',
+  minLen: 'Min length is {min} characters',
+  maxLen: 'Max length is {max} characters'
 }

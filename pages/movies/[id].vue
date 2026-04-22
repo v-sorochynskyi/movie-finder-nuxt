@@ -1,5 +1,5 @@
 <template>
-  <div v-loading="pending">
+  <div v-loading.fullscreen="pending">
     <div v-if="error" class="flex flex-col items-center gap-5">
       <h1 class="text-center">{{ error }}</h1>
       <el-button @click="navigateTo(localePath('index'))">Back to search</el-button>
@@ -17,36 +17,24 @@
         >
 
         <ul>
-          <li>
-            Year: {{ movieDetails?.Year }}
-          </li>
-          <li>
-            Country: {{ movieDetails?.Country }}
-          </li>
-          <li>
-            Director: {{ movieDetails?.Director }}
-          </li>
-          <li>
-            Genre: {{ movieDetails?.Genre }}
-          </li>
-          <li>
-            Language: {{ movieDetails?.Language }}
-          </li>
-          <li>
-            Plot: {{ movieDetails?.Plot }}
-          </li>
-          <li class="flex items-center">
-            IMDB Rating: <el-rate
-              :model-value="Number(movieDetails?.imdbRating) || 0"
+          <li
+            v-for="item in details"
+            :key="item.label"
+            :class="{ 'flex items-center': 'rate' in item }"
+          >
+            {{ $t(item.label) }}:
+            <el-rate
+              v-if="'rate' in item"
+              :model-value="item.rate"
               :max="10"
               allow-half
               show-score
               disabled
               class="ml-2"
             />
-          </li>
-          <li>
-            IMDB Votes: {{ movieDetails?.imdbVotes }}
+            <template v-else>
+              {{ item.value }}
+            </template>
           </li>
         </ul>
       </div>
@@ -55,23 +43,40 @@
 </template>
 
 <script lang="ts" setup>
-import type { IMovieResponse } from '@/types/movies'
+import type { IMovieDetails, IMovieErrorResponse } from '@/types/movies'
 
 definePageMeta({
   pageLabel: 'navigation.searchResult'
 })
 
-const route = useRoute()
-const localePath = useLocalePath()
-const movieDetails = ref<IMovieResponse | null>(null)
-const error = ref('')
-const { data, pending } = await useHttp<IMovieResponse>({ query: { i: route.params.id } })
+type TMoviesIdRoute = Extract<TRouteNamedMapKeys, `movies-id___${string}`>
 
-console.log('data', data.value)
-if (data.value.Error) {
-  console.log(data.value.Error)
+const route = useRoute<TMoviesIdRoute>()
+const localePath = useLocalePath()
+const movieDetails = ref<IMovieDetails | null>(null)
+const error = ref('')
+const { data, pending } = await useHttp<IMovieDetails | IMovieErrorResponse>({
+  key: `movie-${route.params.id}`,
+  query: { i: route.params.id }
+})
+
+const details = computed(() => {
+  const d = movieDetails.value
+  return [
+    { label: 'general.year', value: d?.Year },
+    { label: 'general.country', value: d?.Country },
+    { label: 'general.director', value: d?.Director },
+    { label: 'general.genre', value: d?.Genre },
+    { label: 'general.language', value: d?.Language },
+    { label: 'general.plot', value: d?.Plot },
+    { label: 'general.imdbRating', rate: Number(d?.imdbRating) || 0 },
+    { label: 'general.imdbVotes', value: d?.imdbVotes }
+  ]
+})
+
+if (data.value && 'Error' in data.value) {
   error.value = data.value.Error
-} else {
+} else if (data.value) {
   movieDetails.value = data.value
 }
 

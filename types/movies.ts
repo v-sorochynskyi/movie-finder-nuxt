@@ -1,15 +1,9 @@
-export interface ISearch {
+export interface IMovie {
   Title: string
   Year: string
   imdbID: string
   Type: string
   Poster: string
-}
-
-export interface ISearchResponse {
-  Search: ISearch[]
-  totalResults: string
-  Response: string
 }
 
 export interface IRating {
@@ -18,6 +12,12 @@ export interface IRating {
 }
 
 export interface IMovieResponse {
+  Search: IMovie[]
+  totalResults: string
+  Response: string
+}
+
+export interface IMovieDetails {
   Title: string
   Year: string
   Rated: string
@@ -43,4 +43,9 @@ export interface IMovieResponse {
   Production: string
   Website: string
   Response: string
+}
+
+export interface IMovieErrorResponse {
+  Response: string
+  Error: string
 }
