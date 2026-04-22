@@ -11,6 +11,9 @@ export const useGeneralStore = defineStore('general', {
   getters: {},
   actions: {
     async getMovies ({ search }: { search: string }) {
+      this.error = null
+      this.movies = []
+
       const { data } = await useHttp<IMovieResponse | IMovieErrorResponse>({ query: { s: search } })
 
       if (data.value && 'Error' in data.value) {
