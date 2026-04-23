@@ -74,10 +74,16 @@ const details = computed(() => {
   ]
 })
 
-if (data.value && 'Error' in data.value) {
-  error.value = data.value.Error
-} else if (data.value) {
+if (data.value && isMovieDetailsResponse(data.value)) {
   movieDetails.value = data.value
+} else if (data.value && 'Error' in data.value) {
+  error.value = data.value.Error
+}
+
+function isMovieDetailsResponse (
+  response: IMovieDetails | IMovieErrorResponse
+): response is IMovieDetails {
+  return !('Error' in response) && response.Response === 'True'
 }
 
 </script>

@@ -42,7 +42,7 @@ export interface IMovieDetails {
   BoxOffice: string
   Production: string
   Website: string
-  Response: string
+  Response: 'True' | 'False'
 }
 
 export interface IMovieErrorResponse {
